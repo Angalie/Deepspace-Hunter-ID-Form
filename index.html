@@ -897,7 +897,21 @@
     const pft = prevFrontFace.querySelector('.card-title'); if(pft) pft.style.color = data.titleColor || '';
     const pbt = prevBackFace.querySelector('.card-title'); if(pbt) pbt.style.color = data.titleColor || '';
     const pma = prevBackFace.querySelector('.cb-section-label'); if(pma) pma.style.color = data.titleColor || '';
-    const pqt = prevBackFace.querySelector('.cb-quote .quote-text'); if(pqt) pqt.style.color = data.quoteColor || '';
+
+    const pqt = prevBackFace.querySelector('.cb-quote .quote-text');
+    if(pqt){
+      pqt.textContent = data.quote || '';
+      pqt.style.color = data.quoteColor || '';
+    }
+
+    prevSigPlaceholder.style.display = data.signature ? 'none' : 'flex';
+    if(!previewShowingFront){
+      if(fitPreviewSigCanvas()){
+        paintDataUrlOnCanvas(prevSigCanvas, data.signature, function(){
+          if(data.signature && data.signatureColor) recolorCanvasInk(prevSigCanvas, data.signatureColor);
+        });
+      }
+    }
   }
 
   document.getElementById('prevFlipBtn').addEventListener('click', function(){
@@ -913,6 +927,7 @@
   document.getElementById('f_titleColor').addEventListener('input', syncPreview);
   document.getElementById('f_signatureColor').addEventListener('input', syncPreview);
   document.getElementById('f_quoteColor').addEventListener('input', syncPreview);
+  document.getElementById('f_quote').addEventListener('input', syncPreview);
 
   /* ---------------- IMAGE CROPPER ---------------- */
   const cropOverlay = document.getElementById('cropOverlay');
@@ -1170,9 +1185,11 @@
   attachSignaturePad(qSigCanvas, function(){
     signatureData = qSigCanvas.toDataURL('image/png');
     updateSigPlaceholder();
+    syncPreview();
   });
   document.getElementById('qSigClearBtn').addEventListener('click', function(){
     clearSignature();
+    syncPreview();
   });
 
   /* ---------------- CONSENT CHECKBOXES (mutually exclusive) ---------------- */
