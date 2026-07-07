@@ -143,6 +143,1184 @@
     margin:-6px 0 18px;
     text-align:center;
   }
+  .consent-hint{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    text-align:center;
+    margin:-10px 0 18px;
+    padding:6px 16px;
+    border-radius:999px;
+    display:inline-block;
+  }
+
+  .sparkles{
+    position:absolute;inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-image:var(--fx);
+    opacity:var(--fx-opacity);
+  }
+
+  /* ================= CARD (true ID-1 proportions, 85.6 x 53.98mm) ================= */
+  #card-wrap{
+    width:560px;
+    max-width:94vw;
+  }
+  #card{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+  }
+  .card-face{
+    position:absolute;inset:0;
+    display:none;
+    flex-direction:column;
+    border-radius:22px;
+    overflow:hidden;
+    border:3px solid var(--ink);
+    background:var(--card-bg);
+    box-shadow:var(--card-shadow);
+    color:var(--ink);
+  }
+  .card-face.active{display:flex;}
+
+  /* ---- shared header ---- */
+  .card-header{
+    position:relative;z-index:1;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 16px 6px;
+  }
+  .card-header .spark{color:var(--pink-deep);font-size:13px;}
+  .card-title{font-family:'Cinzel',serif;font-weight:700;font-size:15px;letter-spacing:2.5px;color:var(--ink);}
+  .card-divider{position:relative;z-index:1;flex-shrink:0;height:2px;background:var(--ink);margin:0 18px 10px;border-radius:2px;opacity:0.9;}
+
+  /* ---- stat lines (shared) ---- */
+  .stat-line{display:flex;align-items:baseline;gap:6px;}
+  .stat-row{display:flex;gap:14px;}
+  .stat-row .stat-line{flex:1;min-width:0;}
+  .stat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-bottom:1px;}
+  .dot-pink{background:var(--pink-deep);}
+  .dot-purple{background:var(--purple-deep);}
+  .dot-blue{background:var(--blue-deep);}
+  .stat-label{font-family:'Poppins',sans-serif;font-weight:800;font-size:11px;letter-spacing:0.5px;color:var(--ink);flex-shrink:0;}
+  .stat-value{
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;color:var(--ink);
+    border-bottom:1px dotted var(--line);outline:none;flex:1;min-width:0;padding-bottom:1px;
+  }
+  .stat-value:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;}
+
+  /* ---- FRONT FACE ---- */
+  .cf-main{position:relative;z-index:1;flex:1;min-height:0;display:flex;gap:16px;padding:2px 18px 16px;}
+  .cf-photo-frame{
+    position:relative;
+    flex:0 0 140px;
+    border:3px solid var(--ink);
+    border-radius:12px;
+    overflow:hidden;
+    background:linear-gradient(180deg,var(--blue) 0%, #eef6fc 55%, var(--pink) 100%);
+    cursor:pointer;
+  }
+  .cf-photo-frame::before{
+    content:'';position:absolute;left:-12%;right:-12%;bottom:-8%;height:50%;
+    background:var(--purple-deep);opacity:0.85;z-index:0;
+    clip-path:polygon(0% 100%, 22% 35%, 42% 68%, 62% 18%, 82% 58%, 100% 100%);
+  }
+  .cf-photo-frame::after{
+    content:'';position:absolute;top:12%;right:16%;width:24%;height:0;padding-top:24%;
+    border-radius:50%;background:var(--pink-deep);opacity:0.9;z-index:0;
+  }
+  .cf-photo-frame img{width:100%;height:100%;object-fit:cover;display:none;position:absolute;inset:0;z-index:2;}
+  .cf-photo-placeholder{
+    position:relative;z-index:2;
+    color:var(--ink);font-family:'Cinzel',serif;font-weight:700;letter-spacing:2px;
+    text-align:center;font-size:11px;line-height:1.9;pointer-events:none;
+    display:flex;align-items:center;justify-content:center;height:100%;
+  }
+  .cf-photo-hint{
+    position:absolute;bottom:6px;left:0;right:0;text-align:center;z-index:2;
+    font-size:8px;font-weight:600;color:var(--ink);opacity:0.75;font-family:'Poppins',sans-serif;pointer-events:none;
+  }
+
+  .cf-stats{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;}
+  .stat-name .stat-value{
+    font-family:'Cinzel',serif;font-weight:700;font-size:19px;color:var(--ink);
+    border-bottom:2px solid var(--ink);padding-bottom:3px;
+    text-align:center;
+  }
+  .stat-name .stat-value:empty:before{font-family:'Poppins',sans-serif;font-weight:400;font-size:14px;}
+  .skill-line{align-items:center;}
+  .cf-evo{display:flex;gap:6px;}
+
+  .evo-icon{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--chip);
+    border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;flex-shrink:0;
+    font-size:10px;color:var(--ink);
+    opacity:0.45;
+  }
+  .evo-icon.selected{opacity:1;background:var(--tint);}
+  .evo-icon[data-bound="star"], .evo-icon[data-bound="crow"]{--tint:var(--pink-deep);}
+  .evo-icon[data-bound="snowflake"], .evo-icon[data-bound="apple"]{--tint:var(--blue-deep);}
+  .evo-icon[data-bound="koi"], .evo-icon[data-bound="paw"]{--tint:var(--purple-deep);}
+
+  .barcode{
+    width:70px;height:18px;border-radius:2px;
+    background:repeating-linear-gradient(90deg,
+      var(--ink) 0 1px, transparent 1px 3px,
+      var(--ink) 3px 4px, transparent 4px 5px,
+      var(--ink) 5px 7px, transparent 7px 8px,
+      var(--ink) 8px 9px, transparent 9px 11px,
+      var(--ink) 11px 12px, transparent 12px 14px);
+  }
+
+  /* ---- BACK FACE ---- */
+  .cb-main{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;padding:2px 18px 14px;}
+  .cb-info-block{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .cb-section-label{font-family:'Cinzel',serif;font-weight:700;font-size:9.5px;letter-spacing:1.5px;color:var(--ink);margin-bottom:7px;}
+  .cb-about{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;}
+  .cb-about-item{display:flex;align-items:baseline;gap:5px;min-width:0;}
+  .cb-about-item .lbl{font-family:'Poppins',sans-serif;font-weight:800;font-size:8px;letter-spacing:0.3px;color:var(--ink);flex-shrink:0;}
+  .cb-about-item .val{
+    font-family:'Poppins',sans-serif;font-weight:500;font-size:9px;color:var(--ink);flex:1;min-width:0;
+    border-bottom:1px dotted var(--line);outline:none;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .cb-about-item .val:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;}
+  .cb-about-pair{grid-template-columns:1fr 1fr;gap:9px 28px;justify-items:center;}
+  .cb-about-pair .cb-about-item{gap:7px;justify-content:center;}
+  .cb-about-pair .lbl{font-size:10px;letter-spacing:0.6px;}
+  .cb-about-pair .val{font-size:12px;font-weight:600;flex:0 1 auto;white-space:nowrap;}
+
+  .cb-quote{
+    display:flex;align-items:center;gap:8px;
+    background:var(--chip);border:2px solid var(--ink);
+    border-radius:12px;padding:4px 10px;
+  }
+  .cb-quote .quote-mark{font-size:17px;color:var(--pink-deep);flex-shrink:0;font-family:Georgia,serif;font-weight:700;}
+  .cb-quote .quote-text{
+    flex:1;font-family:'Marcellus',serif;font-style:italic;font-weight:700;font-size:12.5px;color:var(--pink-deep);
+    text-align:center;outline:none;min-height:16px;
+  }
+  .cb-quote .quote-text:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;}
+
+  .cb-signature{display:flex;flex-direction:column;align-items:center;}
+  .cb-sig-canvas-wrap{position:relative;width:70%;}
+  .cb-sig-canvas{
+    display:block;width:100%;height:52px;
+    border-bottom:1px solid var(--ink);
+    background:transparent;cursor:crosshair;touch-action:none;
+  }
+  .cb-sig-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Marcellus',serif;font-style:italic;font-size:11px;color:var(--ph);
+    pointer-events:none;
+  }
+  .cb-sig-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;color:var(--ink);opacity:0.75;margin-top:3px;}
+
+  .cb-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;}
+  .cb-footer .badge-sub{
+    font-family:'Marcellus',serif;font-style:italic;font-size:8.5px;color:var(--ink);
+    outline:none;flex:1;min-width:0;opacity:0.85;
+  }
+  .cb-footer .badge-sub:empty:before{content:attr(data-ph);color:var(--ph);}
+
+  /* ---------------- QUESTIONNAIRE ---------------- */
+  #tab-quest form{
+    position:relative;
+    overflow:hidden;
+    width:640px;
+    max-width:100%;
+    background:var(--card-bg);
+    background-attachment:fixed;
+    border:3px solid var(--ink);
+    border-radius:22px;
+    padding:32px 36px 36px;
+    box-shadow:var(--card-shadow);
+  }
+  .q-section-title{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:13px;letter-spacing:2px;
+    color:var(--ink);
+    margin:26px 0 14px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--ink);
+    text-align:center;
+  }
+  .q-section-title:first-of-type{margin-top:0;}
+  #tab-quest label{
+    display:block;
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:11px;
+    letter-spacing:0.5px;
+    color:var(--ink);
+    margin-bottom:5px;
+    text-align:center;
+  }
+  .q-field{margin-bottom:16px;text-align:center;}
+  #tab-quest input[type=text], #tab-quest textarea{
+    width:100%;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    border:none;
+    border-bottom:1px dotted var(--line);
+    background:transparent;
+    padding:6px 2px;
+    outline:none;
+    text-align:center;
+  }
+  #tab-quest input[type=text]::placeholder, #tab-quest textarea::placeholder{
+    color:var(--ph);
+  }
+  #tab-quest textarea{resize:vertical;min-height:44px;font-family:'Poppins',sans-serif;font-size:13px;}
+  .q-row-2{display:flex;gap:20px;}
+  .q-row-2 .q-field{flex:1;min-width:0;}
+
+  .q-photo-upload{
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .q-photo-preview{
+    width:110px;height:110px;border-radius:10px;
+    border:3px solid var(--ink);
+    background:linear-gradient(180deg,var(--blue) 0%, #eef6fc 55%, var(--pink) 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink);
+    font-family:'Cinzel',serif;font-weight:700;font-size:10px;letter-spacing:2px;
+    text-align:center;line-height:1.6;
+    overflow:hidden;flex-shrink:0;
+  }
+  .q-photo-preview img{width:100%;height:100%;object-fit:cover;display:none;}
+  .q-upload-btn{
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:12.5px;
+    padding:9px 18px;border-radius:999px;border:2.5px solid var(--ink);
+    background:var(--chip);color:var(--ink);cursor:pointer;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .q-upload-btn-ghost{
+    background:transparent;box-shadow:none;font-weight:600;
+  }
+  .q-optional{font-weight:400;font-size:11px;color:var(--ink);opacity:0.6;letter-spacing:0;text-transform:none;}
+
+  .q-sig-wrap{position:relative;width:100%;max-width:420px;margin:0 auto;}
+  .q-sig-canvas{
+    display:block;width:100%;height:120px;
+    border:2px solid var(--ink);border-radius:10px;
+    background:var(--chip);cursor:crosshair;touch-action:none;
+  }
+  .q-sig-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Marcellus',serif;font-style:italic;font-size:15px;color:var(--ph);
+    pointer-events:none;
+  }
+
+  .q-evo-grid{
+    display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  }
+  .q-evo-check{
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .q-evo-check input{display:none;}
+  .q-evo-icon{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--chip);
+    border:2.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+    transition:all .15s ease;
+  }
+  .q-evo-check input:checked + .q-evo-icon{
+    background:linear-gradient(135deg,var(--pink),var(--purple) 55%,var(--blue));
+    box-shadow:2px 2px 0 var(--ink);
+  }
+
+  .q-submit-btn{
+    width:100%;
+    margin-top:28px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;font-size:14px;letter-spacing:0.5px;
+    padding:14px;border-radius:999px;border:2.5px solid var(--ink);color:var(--ink);
+    background:linear-gradient(120deg,var(--pink),var(--purple) 55%,var(--blue));
+    cursor:pointer;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .q-submit-btn.q-secondary{
+    background:var(--chip);
+    color:var(--ink);
+    margin-top:12px;
+  }
+  .q-note{
+    font-size:11.5px;color:rgba(243,236,255,0.68);text-align:center;margin-top:12px;line-height:1.5;
+  }
+</style>
+</head>
+<body>
+
+  <h1 class="page-title">✦ Deepspace Hunter ID Maker ✦</h1>
+  <p class="page-sub">Answer the questionnaire, then hit "Fill My Card" to see it come to life — or send your answers file to someone else to build the card for you.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tabBtnQuest">📋 Questionnaire</button>
+    <button class="tab-btn" id="tabBtnCard">🪪 ID Card</button>
+  </div>
+
+  <!-- ============ QUESTIONNAIRE TAB ============ -->
+  <div class="tab-panel active" id="tab-quest">
+    <form id="qForm" onsubmit="return false;">
+      <div class="sparkles"></div>
+
+      <div class="q-section-title">Your Photo</div>
+      <div class="q-photo-upload">
+        <div class="q-photo-preview" id="qPhotoPreview">
+          <span id="qPhotoPlaceholderText">NO<br>PHOTO</span>
+          <img id="qPhotoImg" src="" alt="">
+        </div>
+        <label class="q-upload-btn" for="qPhotoInput">📷 Choose Photo</label>
+        <input type="file" id="qPhotoInput" accept="image/*" style="display:none;">
+      </div>
+
+      <div class="q-section-title">Card Background <span class="q-optional">(optional)</span></div>
+      <div class="q-photo-upload">
+        <div class="q-photo-preview" id="qBgPreview">
+          <span id="qBgPlaceholderText">NO<br>IMAGE</span>
+          <img id="qBgImg" src="" alt="">
+        </div>
+        <label class="q-upload-btn" for="qBgInput">🖼️ Choose Background</label>
+        <input type="file" id="qBgInput" accept="image/*" style="display:none;">
+        <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qBgRemoveBtn">✦ Remove</button>
+      </div>
+      <p class="q-note" style="margin-top:-4px;margin-bottom:8px;">Uploads here preview live behind this form, and carry over to the ID card. Your original file stays full quality — download it anytime from the ID Card tab.</p>
+
+      <div class="q-section-title">Basics</div>
+      <div class="q-field">
+        <label>Name</label>
+        <input type="text" id="f_name">
+      </div>
+      <div class="q-row-2">
+        <div class="q-field">
+          <label>Birthdate (MM/DD)</label>
+          <input type="text" id="f_birthdate" placeholder="00 / 00">
+        </div>
+        <div class="q-field">
+          <label>Height (cm)</label>
+          <input type="text" id="f_height">
+        </div>
+      </div>
+      <div class="q-row-2">
+        <div class="q-field">
+          <label>Gender</label>
+          <input type="text" id="f_gender">
+        </div>
+        <div class="q-field">
+          <label>Zodiac</label>
+          <input type="text" id="f_zodiac">
+        </div>
+      </div>
+      <div class="q-field">
+        <label>Hunter Rank</label>
+        <input type="text" id="f_hunterRank">
+      </div>
+      <div class="q-field">
+        <label>Affiliation</label>
+        <input type="text" id="f_affiliation" value="Deepspace Hunters">
+      </div>
+      <div class="q-field">
+        <label>Evol</label>
+        <input type="text" id="f_evol">
+      </div>
+
+      <div class="q-section-title">Bound (select any)</div>
+      <div class="q-evo-grid">
+        <label class="q-evo-check"><input type="checkbox" value="star"><span class="q-evo-icon">★</span></label>
+        <label class="q-evo-check"><input type="checkbox" value="snowflake"><span class="q-evo-icon">❄</span></label>
+        <label class="q-evo-check"><input type="checkbox" value="koi"><span class="q-evo-icon">🐟</span></label>
+        <label class="q-evo-check"><input type="checkbox" value="crow"><span class="q-evo-icon">🐦‍⬛</span></label>
+        <label class="q-evo-check"><input type="checkbox" value="apple"><span class="q-evo-icon">🍎</span></label>
+        <label class="q-evo-check"><input type="checkbox" value="paw"><span class="q-evo-icon">🐾</span></label>
+      </div>
+
+      <div class="q-section-title">More About You</div>
+      <div class="q-row-2">
+        <div class="q-field">
+          <label>Signature Weapon / Gear</label>
+          <input type="text" id="f_sigWeapon">
+        </div>
+        <div class="q-field">
+          <label>Likes</label>
+          <input type="text" id="f_likes">
+        </div>
+      </div>
+      <div class="q-row-2">
+        <div class="q-field">
+          <label>Dislikes</label>
+          <input type="text" id="f_dislikes">
+        </div>
+        <div class="q-field">
+          <label>Hunter Since</label>
+          <input type="text" id="f_hunterSince" placeholder="e.g. 2151">
+        </div>
+      </div>
+
+      <div class="q-section-title">Final Touches</div>
+      <div class="q-field">
+        <label>Your Quote</label>
+        <textarea id="f_quote"></textarea>
+      </div>
+      <div class="q-field">
+        <label>Badge Tagline</label>
+        <input type="text" id="f_badgeSub" value="Humanity's future is in our hands.">
+      </div>
+      <div class="q-field">
+        <label>Signature</label>
+        <div class="q-sig-wrap">
+          <canvas id="qSigCanvas" class="q-sig-canvas"></canvas>
+          <div class="q-sig-placeholder" id="qSigPlaceholder">Sign here</div>
+        </div>
+        <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qSigClearBtn" style="margin-top:8px;">✦ Clear Signature</button>
+      </div>
+
+      <button type="button" class="q-submit-btn" id="fillCardBtn">✦ Fill My Card</button>
+      <button type="button" class="q-submit-btn q-secondary" id="exportAnswersBtn">⬇ Export Answers Only (.json)</button>
+      <p class="q-note">"Fill My Card" builds your ID card right here on the ID Card tab. Or export a small answers file to send to someone else — they can import it on the ID Card tab to build it for you.</p>
+    </form>
+  </div>
+
+  <!-- ============ ID CARD TAB ============ -->
+  <div class="tab-panel" id="tab-card">
+
+    <div class="toolbar">
+      <button class="btn" id="downloadBtn">⬇ Download This Side</button>
+      <button class="btn secondary" id="flipBtn">↺ Flip Card</button>
+      <button class="btn secondary" id="exportBtn">📤 Export My Info (.json)</button>
+      <label class="btn secondary" style="cursor:pointer;">
+        📥 Import Info (.json)
+        <input type="file" id="importInput" accept="application/json,.json" style="display:none;">
+      </label>
+      <label class="btn secondary" style="cursor:pointer;">
+        📷 Upload Photo
+        <input type="file" id="photoInput" accept="image/*" style="display:none;">
+      </label>
+      <label class="btn secondary" style="cursor:pointer;">
+        🖼️ Upload Background
+        <input type="file" id="bgInput" accept="image/*" style="display:none;">
+      </label>
+      <button class="btn secondary" id="downloadBgBtn">⬇ Download Background</button>
+      <button class="btn secondary" id="downloadSigBtn">⬇ Download Signature</button>
+      <button class="btn secondary" id="resetBtn">✦ Blank Card</button>
+    </div>
+    <p class="card-hint">Click "Flip Card" above to see the back. A card background applies to both sides and the questionnaire.</p>
+    <p class="consent-hint" id="consentHint" style="display:none;"></p>
+
+    <div id="card-wrap">
+      <div id="card">
+
+        <!-- FRONT -->
+        <div class="card-face active" id="frontFace">
+          <div class="sparkles"></div>
+
+          <div class="card-header">
+            <span class="spark">✧</span>
+            <span class="card-title">DEEPSPACE HUNTER</span>
+            <span class="spark">✧</span>
+          </div>
+          <div class="card-divider"></div>
+
+          <div class="cf-main">
+            <div class="cf-photo-frame" id="photoFrame">
+              <div class="cf-photo-placeholder" id="photoPlaceholder">YOUR<br>PHOTO</div>
+              <img id="photoImg" src="" alt="">
+              <div class="cf-photo-hint">click to upload</div>
+            </div>
+
+            <div class="cf-stats">
+              <div class="stat-line stat-name">
+                <span class="stat-value" contenteditable="true" data-ph="Your name" data-field="name"></span>
+              </div>
+              <div class="stat-row">
+                <div class="stat-line">
+                  <span class="stat-dot dot-pink"></span>
+                  <span class="stat-label">DOB:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="00 / 00" data-field="birthdate"></span>
+                </div>
+                <div class="stat-line">
+                  <span class="stat-dot dot-purple"></span>
+                  <span class="stat-label">SEX:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="—" data-field="gender"></span>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-line">
+                  <span class="stat-dot dot-blue"></span>
+                  <span class="stat-label">HEIGHT:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="___ cm" data-field="height"></span>
+                </div>
+                <div class="stat-line">
+                  <span class="stat-dot dot-pink"></span>
+                  <span class="stat-label">ZODIAC:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="—" data-field="zodiac"></span>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-line">
+                  <span class="stat-dot dot-purple"></span>
+                  <span class="stat-label">AFFILIATION:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="Deepspace Hunters" data-field="affiliation">Deepspace Hunters</span>
+                </div>
+                <div class="stat-line">
+                  <span class="stat-dot dot-blue"></span>
+                  <span class="stat-label">RANK:</span>
+                  <span class="stat-value" contenteditable="true" data-ph="—" data-field="hunterRank"></span>
+                </div>
+              </div>
+              <div class="stat-line skill-line">
+                <span class="stat-dot dot-pink"></span>
+                <span class="stat-label">BOUND:</span>
+                <div class="cf-evo" id="boundRow">
+                  <div class="evo-icon" data-bound="star">★</div>
+                  <div class="evo-icon" data-bound="snowflake">❄</div>
+                  <div class="evo-icon" data-bound="koi">🐟</div>
+                  <div class="evo-icon" data-bound="crow">🐦‍⬛</div>
+                  <div class="evo-icon" data-bound="apple">🍎</div>
+                  <div class="evo-icon" data-bound="paw">🐾</div>
+                </div>
+              </div>
+              <div class="stat-line">
+                <span class="stat-dot dot-purple"></span>
+                <span class="stat-label">EVOL:</span>
+                <span class="stat-value" contenteditable="true" data-ph="—" data-field="evol"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BACK -->
+        <div class="card-face" id="backFace">
+          <div class="sparkles"></div>
+
+          <div class="card-header">
+            <span class="spark">✧</span>
+            <span class="card-title">HUNTER PROFILE</span>
+            <span class="spark">✧</span>
+          </div>
+          <div class="card-divider"></div>
+
+          <div class="cb-main">
+            <div class="cb-info-block">
+              <div class="cb-section-label">MORE ABOUT YOU</div>
+              <div class="cb-about cb-about-pair">
+              <div class="cb-about-item">
+                <span class="stat-dot dot-pink"></span>
+                <div class="lbl">⚔ WEAPON:</div>
+                <div class="val" contenteditable="true" data-ph="..." data-field="sigWeapon"></div>
+              </div>
+              <div class="cb-about-item">
+                <span class="stat-dot dot-purple"></span>
+                <div class="lbl">♡ LIKES:</div>
+                <div class="val" contenteditable="true" data-ph="..." data-field="likes"></div>
+              </div>
+              <div class="cb-about-item">
+                <span class="stat-dot dot-blue"></span>
+                <div class="lbl">✕ DISLIKES:</div>
+                <div class="val" contenteditable="true" data-ph="..." data-field="dislikes"></div>
+              </div>
+              <div class="cb-about-item">
+                <span class="stat-dot dot-pink"></span>
+                <div class="lbl">⏳ HUNTER SINCE:</div>
+                <div class="val" contenteditable="true" data-ph="..." data-field="hunterSince"></div>
+              </div>
+              </div>
+            </div>
+
+            <div class="cb-quote">
+              <span class="quote-mark">"</span>
+              <div class="quote-text" contenteditable="true" data-ph="Type your quote here..." data-field="quote"></div>
+              <span class="quote-mark">"</span>
+            </div>
+
+            <div class="cb-signature">
+              <div class="cb-sig-canvas-wrap">
+                <canvas id="cardSigCanvas" class="cb-sig-canvas"></canvas>
+                <div class="cb-sig-placeholder" id="cardSigPlaceholder">Sign here</div>
+              </div>
+              <div class="cb-sig-label">SIGNATURE</div>
+            </div>
+
+            <div class="cb-footer">
+              <div class="badge-sub" contenteditable="true" data-ph="Badge tagline" data-field="badgeSub">Humanity's future is in our hands.</div>
+              <div class="barcode"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+  /* ---------------- TAB SWITCHING ---------------- */
+  const tabBtnQuest = document.getElementById('tabBtnQuest');
+  const tabBtnCard = document.getElementById('tabBtnCard');
+  const tabQuest = document.getElementById('tab-quest');
+  const tabCard = document.getElementById('tab-card');
+
+  function switchTab(which){
+    const toQuest = which === 'quest';
+    tabBtnQuest.classList.toggle('active', toQuest);
+    tabBtnCard.classList.toggle('active', !toQuest);
+    tabQuest.classList.toggle('active', toQuest);
+    tabCard.classList.toggle('active', !toQuest);
+    // Canvases can't size themselves correctly while their tab is hidden (display:none),
+    // so re-fit + repaint whichever signature pad just became visible.
+    if(typeof fitSigCanvas === 'function'){
+      const canvas = toQuest ? qSigCanvas : cardSigCanvas;
+      if(canvas && fitSigCanvas(canvas)){
+        paintDataUrlOnCanvas(canvas, signatureData);
+      }
+    }
+  }
+  tabBtnQuest.addEventListener('click', function(){ switchTab('quest'); });
+  tabBtnCard.addEventListener('click', function(){ switchTab('card'); });
+
+  /* ---------------- QUESTIONNAIRE: photo upload ---------------- */
+  const qPhotoInput = document.getElementById('qPhotoInput');
+  const qPhotoImg = document.getElementById('qPhotoImg');
+  const qPhotoPlaceholderText = document.getElementById('qPhotoPlaceholderText');
+  let qPhotoData = "";
+
+  qPhotoInput.addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      qPhotoData = ev.target.result;
+      qPhotoImg.src = qPhotoData;
+      qPhotoImg.style.display = 'block';
+      qPhotoPlaceholderText.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  /* ---------------- CARD/FORM BACKGROUND IMAGE (shared: questionnaire form + both card faces) ---------------- */
+  let bgImageData = ""; // full-quality data URL of whatever the person uploaded (or imported)
+
+  // Convert a data URL back into a real Blob without any re-encoding, so downloads stay byte-for-byte
+  // identical to whatever was uploaded (no quality loss from canvas re-compression).
+  function dataURLtoBlob(dataurl){
+    const parts = dataurl.split(',');
+    const mimeMatch = parts[0].match(/:(.*?);/);
+    const mime = mimeMatch ? mimeMatch[1] : 'application/octet-stream';
+    const binary = atob(parts[1]);
+    let len = binary.length;
+    const bytes = new Uint8Array(len);
+    while(len--){ bytes[len] = binary.charCodeAt(len); }
+    return new Blob([bytes], {type: mime});
+  }
+
+  // Applies (or clears) the background image across the form + both card faces.
+  // A tinted overlay sits on top of the image so the card/form text stays readable.
+  function applyBackgroundImage(dataUrl){
+    const targets = [frontFace, backFace].filter(Boolean);
+    targets.forEach(function(el){
+      if(dataUrl){
+        el.style.backgroundImage =
+          'linear-gradient(rgba(10,5,25,0.4), rgba(10,5,25,0.4)), url("' + dataUrl + '")';
+        el.style.backgroundSize = 'cover, cover';
+        el.style.backgroundPosition = 'center, center';
+        el.style.backgroundRepeat = 'no-repeat, no-repeat';
+      } else {
+        el.style.backgroundImage = '';
+        el.style.backgroundSize = '';
+        el.style.backgroundPosition = '';
+        el.style.backgroundRepeat = '';
+      }
+    });
+  }
+
+  function setBackgroundImage(dataUrl){
+    bgImageData = dataUrl || "";
+    applyBackgroundImage(bgImageData);
+    // keep both upload spots' previews in sync
+    if(bgImageData){
+      qBgImg.src = bgImageData;
+      qBgImg.style.display = 'block';
+      qBgPlaceholderText.style.display = 'none';
+    } else {
+      qBgImg.src = '';
+      qBgImg.style.display = 'none';
+      qBgPlaceholderText.style.display = 'block';
+    }
+  }
+
+  function readImageFileAsBackground(file){
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){ setBackgroundImage(ev.target.result); };
+    reader.readAsDataURL(file);
+  }
+
+  const qBgInput = document.getElementById('qBgInput');
+  const qBgImg = document.getElementById('qBgImg');
+  const qBgPlaceholderText = document.getElementById('qBgPlaceholderText');
+  qBgInput.addEventListener('change', function(e){ readImageFileAsBackground(e.target.files[0]); });
+  document.getElementById('qBgRemoveBtn').addEventListener('click', function(){ setBackgroundImage(''); });
+
+  const bgInput = document.getElementById('bgInput');
+  bgInput.addEventListener('change', function(e){ readImageFileAsBackground(e.target.files[0]); });
+
+  document.getElementById('downloadBgBtn').addEventListener('click', function(){
+    if(!bgImageData){
+      alert('No background image uploaded yet — choose one from the Questionnaire tab or the "Upload Background" button here first.');
+      return;
+    }
+    const blob = dataURLtoBlob(bgImageData);
+    const ext = (blob.type.split('/')[1] || 'png').replace('jpeg','jpg').replace(/[^a-z0-9]/gi,'') || 'png';
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'card-background.' + ext;
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+  });
+
+  /* ---------------- SIGNATURE PAD (drawable, synced between questionnaire + card back) ---------------- */
+  const qSigCanvas = document.getElementById('qSigCanvas');
+  const cardSigCanvas = document.getElementById('cardSigCanvas');
+  const qSigPlaceholder = document.getElementById('qSigPlaceholder');
+  const cardSigPlaceholder = document.getElementById('cardSigPlaceholder');
+  let signatureData = "";
+  let sigHasStrokes = false;
+
+  function inkColor(){
+    return getComputedStyle(document.body).getPropertyValue('--ink').trim() || '#2c2542';
+  }
+
+  function applyDrawStyle(canvas){
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = inkColor();
+    ctx.fillStyle = inkColor();
+  }
+
+  // Resizes a canvas's internal pixel buffer to match its on-screen size (crisp on retina displays).
+  // Returns false (and does nothing) if the canvas is currently hidden (e.g. its tab isn't active).
+  function fitSigCanvas(canvas){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    if(!rect.width || !rect.height) return false;
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    applyDrawStyle(canvas);
+    return true;
+  }
+
+  // Paints a data URL onto a canvas, scaled to fill it, without disturbing the canvas's current resolution.
+  function paintDataUrlOnCanvas(canvas, dataUrl){
+    if(!dataUrl){
+      const ctx = canvas.getContext('2d');
+      ctx.save(); ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+      return;
+    }
+    const img = new Image();
+    img.onload = function(){
+      const ctx = canvas.getContext('2d');
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.restore();
+    };
+    img.src = dataUrl;
+  }
+
+  function updateSigPlaceholders(){
+    if(qSigPlaceholder) qSigPlaceholder.style.display = sigHasStrokes ? 'none' : 'flex';
+    if(cardSigPlaceholder) cardSigPlaceholder.style.display = sigHasStrokes ? 'none' : 'flex';
+  }
+
+  function setSignatureData(dataUrl){
+    signatureData = dataUrl || "";
+    sigHasStrokes = !!signatureData;
+    updateSigPlaceholders();
+  }
+
+  // Called when a stroke finishes on one pad — captures it and mirrors it onto the other pad.
+  function syncSignature(sourceCanvas, targetCanvas){
+    const dataUrl = sourceCanvas.toDataURL('image/png');
+    setSignatureData(dataUrl);
+    if(targetCanvas) paintDataUrlOnCanvas(targetCanvas, dataUrl);
+  }
+
+  function clearSignature(){
+    [qSigCanvas, cardSigCanvas].forEach(function(c){
+      const ctx = c.getContext('2d');
+      ctx.save(); ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0, 0, c.width, c.height);
+      ctx.restore();
+    });
+    setSignatureData('');
+  }
+
+  function attachSignaturePad(canvas, onStrokeEnd){
+    if(!canvas) return;
+    let drawing = false, lastX = 0, lastY = 0;
+    function getPos(e){
+      const rect = canvas.getBoundingClientRect();
+      return {x: e.clientX - rect.left, y: e.clientY - rect.top};
+    }
+    canvas.addEventListener('pointerdown', function(e){
+      drawing = true;
+      const p = getPos(e);
+      lastX = p.x; lastY = p.y;
+      const ctx = canvas.getContext('2d');
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+      if(canvas.setPointerCapture){ try{ canvas.setPointerCapture(e.pointerId); }catch(err){} }
+      e.preventDefault();
+    });
+    canvas.addEventListener('pointermove', function(e){
+      if(!drawing) return;
+      const ctx = canvas.getContext('2d');
+      const p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      lastX = p.x; lastY = p.y;
+      e.preventDefault();
+    });
+    function stop(){
+      if(!drawing) return;
+      drawing = false;
+      onStrokeEnd();
+    }
+    canvas.addEventListener('pointerup', stop);
+    canvas.addEventListener('pointerleave', stop);
+    canvas.addEventListener('pointercancel', stop);
+  }
+
+  fitSigCanvas(qSigCanvas);
+  attachSignaturePad(qSigCanvas, function(){ syncSignature(qSigCanvas, cardSigCanvas); });
+  attachSignaturePad(cardSigCanvas, function(){ syncSignature(cardSigCanvas, qSigCanvas); });
+  document.getElementById('qSigClearBtn').addEventListener('click', clearSignature);
+  updateSigPlaceholders();
+
+  document.getElementById('downloadSigBtn').addEventListener('click', function(){
+    if(!signatureData){
+      alert('Nothing\'s signed yet — draw a signature on the Questionnaire tab or right on the card first.');
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = 'signature.png';
+    link.href = signatureData;
+    link.click();
+  });
+
+  function gatherQuestionnaireData(){
+    const boundTypes = Array.from(document.querySelectorAll('#tab-quest .q-evo-check input:checked')).map(function(el){ return el.value; });
+    return {
+      name: document.getElementById('f_name').value,
+      birthdate: document.getElementById('f_birthdate').value,
+      gender: document.getElementById('f_gender').value,
+      zodiac: document.getElementById('f_zodiac').value,
+      height: document.getElementById('f_height').value,
+      hunterRank: document.getElementById('f_hunterRank').value,
+      affiliation: document.getElementById('f_affiliation').value,
+      evol: document.getElementById('f_evol').value,
+      boundTypes: boundTypes,
+      sigWeapon: document.getElementById('f_sigWeapon').value,
+      likes: document.getElementById('f_likes').value,
+      dislikes: document.getElementById('f_dislikes').value,
+      hunterSince: document.getElementById('f_hunterSince').value,
+      quote: document.getElementById('f_quote').value,
+      badgeSub: document.getElementById('f_badgeSub').value,
+      signature: signatureData,
+      photo: qPhotoData,
+      bgImage: bgImageData
+    };
+  }
+
+  function downloadJSON(data, triggerBtn){
+    try{
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const safeName = (data.name || 'hunter').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'hunter';
+      const link = document.createElement('a');
+      link.download = safeName + '-deepspace-answers.json';
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      if(triggerBtn){
+        const original = triggerBtn.textContent;
+        triggerBtn.textContent = '✓ Downloaded!';
+        setTimeout(function(){ triggerBtn.textContent = original; }, 1800);
+      }
+    } catch(err){
+      alert('Sorry, the download didn\'t go through (' + err.message + '). If you\'re viewing this inside a preview window, try opening the page in its own browser tab instead.');
+    }
+  }
+
+  /* Fill the ID card (on the ID Card tab) with a data object shaped like gatherQuestionnaireData() output */
+  function fillCard(data){
+    document.querySelectorAll('#card [data-field]').forEach(function(el){
+      const key = el.getAttribute('data-field');
+      if(Object.prototype.hasOwnProperty.call(data, key)){
+        el.innerText = data[key] || '';
+      }
+    });
+
+    document.querySelectorAll('#card .evo-icon').forEach(function(icon){
+      icon.classList.remove('selected');
+    });
+    if(Array.isArray(data.boundTypes)){
+      data.boundTypes.forEach(function(key){
+        const icon = document.querySelector('#card .evo-icon[data-bound="' + key + '"]');
+        if(icon) icon.classList.add('selected');
+      });
+    }
+
+    if(data.photo){
+      photoImg.src = data.photo;
+      photoImg.style.display = 'block';
+      photoPlaceholder.style.display = 'none';
+    }
+
+    if(Object.prototype.hasOwnProperty.call(data, 'bgImage')){
+      setBackgroundImage(data.bgImage || '');
+    }
+
+    if(Object.prototype.hasOwnProperty.call(data, 'signature')){
+      setSignatureData(data.signature || '');
+      paintDataUrlOnCanvas(qSigCanvas, signatureData);
+      paintDataUrlOnCanvas(cardSigCanvas, signatureData);
+    }
+  }
+
+  document.getElementById('fillCardBtn').addEventListener('click', function(){
+    const data = gatherQuestionnaireData();
+    fillCard(data);
+    switchTab('card');
+  });
+
+  document.getElementById('exportAnswersBtn').addEventListener('click', function(){
+    downloadJSON(gatherQuestionnaireData(), this);
+  });
+
+  /* ---------------- ID CARD TAB LOGIC ---------------- */
+  const photoFrame = document.getElementById('photoFrame');
+  const photoInput = document.getElementById('photoInput');
+  const photoImg = document.getElementById('photoImg');
+  const photoPlaceholder = document.getElementById('photoPlaceholder');
+
+  photoFrame.addEventListener('click', function(){ photoInput.click(); });
+
+  photoInput.addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      photoImg.src = ev.target.result;
+      photoImg.style.display = 'block';
+      photoPlaceholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  /* ---- Flip card (2D squish illusion, keeps each face render-flat for clean downloads) ---- */
+  const cardOuter = document.getElementById('card');
+  const frontFace = document.getElementById('frontFace');
+  const backFace = document.getElementById('backFace');
+  let showingFront = true;
+
+  function flipCard(){
+    cardOuter.style.transition = 'transform .28s ease';
+    cardOuter.style.transform = 'scaleX(0.04)';
+    setTimeout(function(){
+      showingFront = !showingFront;
+      frontFace.classList.toggle('active', showingFront);
+      backFace.classList.toggle('active', !showingFront);
+      cardOuter.style.transform = 'scaleX(1)';
+      setTimeout(function(){ cardOuter.style.transition = ''; cardOuter.style.transform = ''; }, 300);
+    }, 280);
+  }
+  document.getElementById('flipBtn').addEventListener('click', flipCard);
+
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    const activeFace = showingFront ? frontFace : backFace;
+    html2canvas(activeFace, {scale:3, useCORS:true, backgroundColor:null}).then(function(canvas){
+      const link = document.createElement('a');
+      link.download = 'deepspace-hunter-id-' + (showingFront ? 'front' : 'back') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('#card [data-field]').forEach(function(el){
+      el.innerText = '';
+    });
+    document.querySelectorAll('#card .evo-icon').forEach(function(el){ el.classList.remove('selected'); });
+    photoImg.src = '';
+    photoImg.style.display = 'none';
+    photoPlaceholder.style.display = 'block';
+    setBackgroundImage('');
+    clearSignature();
+  });
+
+  document.querySelectorAll('#card .evo-icon').forEach(function(icon){
+    icon.addEventListener('click', function(e){
+      e.stopPropagation();
+      icon.classList.toggle('selected');
+    });
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    const data = {};
+    document.querySelectorAll('#card [data-field]').forEach(function(el){
+      data[el.getAttribute('data-field')] = el.innerText.trim();
+    });
+    data.boundTypes = Array.from(document.querySelectorAll('#card .evo-icon.selected')).map(function(el){
+      return el.getAttribute('data-bound');
+    });
+    data.photo = (photoImg.style.display === 'block') ? photoImg.src : '';
+    data.bgImage = bgImageData;
+    data.signature = signatureData;
+    downloadJSON(data, this);
+  });
+
+  document.getElementById('importInput').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      let data;
+      try{
+        data = JSON.parse(ev.target.result);
+      }catch(err){
+        alert('That file could not be read. Please pick a valid .json answers file.');
+        return;
+      }
+      fillCard(data);
+      updateConsentHint(data.canPost);
+      e.target.value = '';
+    };
+    reader.readAsText(file);
+  });
+
+  function updateConsentHint(canPost){
+    const hint = document.getElementById('consentHint');
+    if(canPost === 'yes'){
+      hint.textContent = '✅ They said YES — okay to post this card';
+      hint.style.background = 'rgba(74,222,128,0.18)';
+      hint.style.color = '#4ade80';
+      hint.style.border = '2px solid #4ade80';
+      hint.style.display = 'inline-block';
+    } else if(canPost === 'no'){
+      hint.textContent = '❌ They said NO — do not post this card';
+      hint.style.background = 'rgba(239,68,68,0.18)';
+      hint.style.color = '#ef4444';
+      hint.style.border = '2px solid #ef4444';
+      hint.style.display = 'inline-block';
+    } else {
+      hint.textContent = '⚠ No posting answer was given — check with them before posting';
+      hint.style.background = 'rgba(243,236,255,0.1)';
+      hint.style.color = 'var(--ink)';
+      hint.style.border = '2px solid var(--ink)';
+      hint.style.display = 'inline-block';
+    }
+  }
+</script>
+</body>
+</html>
+  }
+  p.page-sub{
+    color:rgba(243,236,255,0.68);
+    font-size:13px;
+    margin:0 0 24px;
+    text-align:center;
+    max-width:520px;
+    line-height:1.5;
+  }
+
+  /* ---------------- TABS ---------------- */
+  .tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:28px;
+    background:var(--chip);
+    border:2.5px solid var(--ink);
+    padding:6px;
+    border-radius:999px;
+  }
+  .tab-btn{
+    font-family:'Cinzel',serif;
+    font-size:12px;
+    letter-spacing:1.5px;
+    padding:10px 22px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    color:var(--ink);
+    background:transparent;
+    transition:all .2s ease;
+  }
+  .tab-btn.active{
+    background:linear-gradient(120deg,var(--pink),var(--purple) 55%,var(--blue));
+    box-shadow:inset 0 0 0 2px var(--ink);
+  }
+  .tab-panel{display:none;width:100%;flex-direction:column;align-items:center;}
+  .tab-panel.active{display:flex;}
+
+  /* ---------------- TOOLBAR (ID Card tab) ---------------- */
+  .toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:20px;
+  }
+  .btn{
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.3px;
+    padding:11px 22px;
+    border-radius:999px;
+    border:2.5px solid var(--ink);
+    cursor:pointer;
+    color:var(--ink);
+    background:linear-gradient(120deg,var(--pink),var(--purple) 55%,var(--blue));
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .btn.secondary{
+    background:var(--chip);
+    color:var(--ink);
+  }
+  .card-hint{
+    color:rgba(243,236,255,0.68);
+    font-size:11.5px;
+    margin:-6px 0 18px;
+    text-align:center;
+  }
 
   .sparkles{
     position:absolute;inset:0;
