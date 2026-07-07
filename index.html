@@ -224,31 +224,131 @@
     color:var(--ink);opacity:0.8;text-align:center;max-width:80px;
   }
 
-  .q-color-preview{
-    margin-top:14px;
-    height:90px;
-    border:2px solid var(--ink);
-    border-radius:12px;
-    display:flex;align-items:center;justify-content:center;
-    background:var(--card-bg);
-    background-size:cover, cover;
-    background-position:center, center;
-    overflow:hidden;
-    padding:0 14px;
-    transition:background-color .15s ease;
-  }
-  .q-color-preview-text{
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:19px;
-    letter-spacing:1px;
-    text-align:center;
-    color:#f3ecff;
-    text-shadow:0 1px 4px rgba(0,0,0,0.4);
-  }
   .q-preview-label{
-    font-size:10.5px;color:var(--ph);text-align:center;margin-top:8px;
+    font-family:'Cinzel',serif;font-weight:700;letter-spacing:2px;
+    font-size:12px;color:var(--ink);text-align:center;margin:26px 0 14px;
+    text-transform:uppercase;
   }
+  .q-preview-wrap{
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    margin-bottom:8px;
+  }
+  #prevCard{
+    position:relative;
+    width:100%;max-width:480px;
+    aspect-ratio:16/9;
+  }
+  .q-flip-preview-btn{margin-top:0;}
+
+  /* ============ mini card preview (mirrors the main app's ID card) ============ */
+  .card-face{
+    position:absolute;inset:0;
+    display:none;
+    flex-direction:column;
+    border-radius:20px;
+    overflow:hidden;
+    border:3px solid var(--ink);
+    background:var(--card-bg);
+    box-shadow:var(--card-shadow);
+    color:var(--ink);
+  }
+  .card-face.active{display:flex;}
+  .card-header{
+    position:relative;z-index:1;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:10px 14px 5px;
+  }
+  .card-header .spark{color:var(--pink-deep);font-size:12px;}
+  .card-title{font-family:'Cinzel',serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--ink);}
+  .card-divider{position:relative;z-index:1;flex-shrink:0;height:2px;background:var(--ink);margin:0 15px 8px;border-radius:2px;opacity:0.9;}
+
+  .stat-line{display:flex;align-items:baseline;gap:5px;}
+  .stat-row{display:flex;gap:12px;}
+  .stat-row .stat-line{flex:1;min-width:0;}
+  .stat-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-bottom:1px;}
+  .dot-pink{background:var(--pink-deep);}
+  .dot-purple{background:var(--purple-deep);}
+  .dot-blue{background:var(--blue-deep);}
+  .stat-label{font-family:'Poppins',sans-serif;font-weight:800;font-size:9.5px;letter-spacing:0.4px;color:var(--ink);flex-shrink:0;}
+  .card-face .stat-value{
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:10.5px;color:var(--ink);
+    border-bottom:1px dotted var(--line);flex:1;min-width:0;padding-bottom:1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .card-face .stat-value:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;}
+
+  .cf-main{position:relative;z-index:1;flex:1;min-height:0;display:flex;gap:13px;padding:2px 15px 13px;}
+  .cf-photo-frame{
+    position:relative;
+    flex:0 0 116px;
+    width:116px;height:174px;
+    align-self:flex-start;
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    overflow:hidden;
+    background:linear-gradient(180deg,var(--blue) 0%, #eef6fc 55%, var(--pink) 100%);
+  }
+  .cf-photo-img-bg{width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;display:none;position:absolute;inset:0;z-index:2;}
+  .cf-photo-placeholder{
+    position:relative;z-index:2;
+    color:var(--ink);font-family:'Cinzel',serif;font-weight:700;letter-spacing:1.5px;
+    text-align:center;font-size:9px;line-height:1.9;pointer-events:none;
+    display:flex;align-items:center;justify-content:center;height:100%;
+  }
+  .cf-stats{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;}
+  .stat-name .stat-value{
+    font-family:'Cinzel',serif;font-weight:700;font-size:15px;color:var(--ink);
+    border-bottom:2px solid var(--ink);padding-bottom:2px;text-align:center;
+  }
+  .skill-line{align-items:center;}
+  .cf-evo{display:flex;gap:5px;}
+  .card-face .evo-icon{
+    width:18px;height:18px;border-radius:50%;
+    background:var(--chip);border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:8px;color:var(--ink);opacity:0.45;flex-shrink:0;
+  }
+  .card-face .evo-icon.selected{opacity:1;background:var(--tint);}
+  .card-face .evo-icon[data-bound="star"], .card-face .evo-icon[data-bound="crow"]{--tint:var(--pink-deep);}
+  .card-face .evo-icon[data-bound="snowflake"], .card-face .evo-icon[data-bound="apple"]{--tint:var(--blue-deep);}
+  .card-face .evo-icon[data-bound="koi"], .card-face .evo-icon[data-bound="paw"]{--tint:var(--purple-deep);}
+
+  .cb-main{position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:space-between;padding:2px 15px 12px;}
+  .cb-info-block{display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .cb-section-label{font-family:'Cinzel',serif;font-weight:700;font-size:8px;letter-spacing:1.2px;color:var(--ink);margin-bottom:6px;}
+  .cb-about-pair{display:grid;grid-template-columns:1fr 1fr;gap:7px 22px;justify-items:center;}
+  .cb-about-item{display:flex;align-items:baseline;gap:4px;min-width:0;justify-content:center;}
+  .cb-about-item .lbl{font-family:'Poppins',sans-serif;font-weight:800;font-size:8px;letter-spacing:0.4px;color:var(--ink);flex-shrink:0;}
+  .cb-about-item .val{
+    font-family:'Poppins',sans-serif;font-weight:600;font-size:10px;color:var(--ink);flex:0 1 auto;min-width:0;
+    border-bottom:1px dotted var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .cb-about-item .val:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;}
+
+  .cb-quote{
+    display:flex;align-items:center;width:88%;margin:0 auto;
+    background:rgba(10,5,25,0.4);border-radius:9px;padding:8px 12px;box-sizing:border-box;
+  }
+  .cb-quote .quote-mark{font-size:16px;color:var(--pink-deep);flex-shrink:0;font-family:Georgia,serif;font-weight:900;text-shadow:0 1px 4px rgba(0,0,0,0.6);margin-right:5px;}
+  .cb-quote .quote-mark:last-child{margin-right:0;margin-left:5px;}
+  .cb-quote .quote-text{
+    flex:1;font-family:'Marcellus',serif;font-style:italic;font-weight:800;font-size:13px;color:var(--pink-deep);
+    text-shadow:0 1px 4px rgba(0,0,0,0.6);text-align:center;min-height:26px;line-height:1.25;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cb-quote .quote-text:empty:before{content:attr(data-ph);color:var(--ph);font-weight:400;text-shadow:none;}
+
+  .cb-signature{display:flex;flex-direction:column;align-items:center;}
+  .cb-sig-canvas-wrap{position:relative;width:88%;height:48px;box-sizing:border-box;}
+  .cb-sig-canvas{display:block;width:100%;height:100%;border-bottom:1px solid var(--ink);background:transparent;}
+  .cb-sig-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Marcellus',serif;font-style:italic;font-size:9px;color:var(--ph);pointer-events:none;
+  }
+  .cb-sig-label{font-family:'Cinzel',serif;font-size:6px;letter-spacing:1.5px;color:var(--ink);opacity:0.75;margin-top:4px;}
+  .cb-footer{display:flex;justify-content:center;}
+  .cb-footer .badge-sub{font-family:'Marcellus',serif;font-style:italic;font-size:7px;color:var(--ink);opacity:0.85;text-align:center;}
+  .cb-footer .badge-sub:empty:before{content:attr(data-ph);color:var(--ph);}
 
   .q-sig-wrap{position:relative;width:100%;max-width:420px;margin:0 auto;}
   .q-sig-canvas{
@@ -441,26 +541,14 @@
         <span class="q-color-swatch-label" id="qColorHex">#F3ECFF</span>
       </div>
       <p class="q-warning-note">⚠ Keep in mind the colors of your background image — pick a text color that still stands out against it.</p>
-      <div class="q-color-preview" id="qColorPreview">
-        <span class="q-color-preview-text" id="qColorPreviewText">Deepspace Hunter Aa123</span>
-      </div>
-      <p class="q-preview-label">Live preview against your uploaded background</p>
     </div>
 
     <div class="q-field">
       <label>Fine-Tune Individual Colors <span class="q-optional">(optional)</span></label>
       <div class="q-color-grid">
         <div class="q-color-grid-item">
-          <input type="color" id="f_frontTitleColor" class="q-color-input-sm" value="#f3ecff">
-          <span class="q-color-grid-label">"Deepspace Hunter"</span>
-        </div>
-        <div class="q-color-grid-item">
-          <input type="color" id="f_backTitleColor" class="q-color-input-sm" value="#f3ecff">
-          <span class="q-color-grid-label">"Hunter Profile"</span>
-        </div>
-        <div class="q-color-grid-item">
-          <input type="color" id="f_moreAboutColor" class="q-color-input-sm" value="#f3ecff">
-          <span class="q-color-grid-label">"More About You"</span>
+          <input type="color" id="f_titleColor" class="q-color-input-sm" value="#f3ecff">
+          <span class="q-color-grid-label">Titles &amp; Headers</span>
         </div>
         <div class="q-color-grid-item">
           <input type="color" id="f_signatureColor" class="q-color-input-sm" value="#c94cdb">
@@ -471,6 +559,89 @@
           <span class="q-color-grid-label">Quote</span>
         </div>
       </div>
+    </div>
+
+    <p class="q-preview-label">Live Card Preview</p>
+    <div class="q-preview-wrap">
+      <div id="prevCard">
+        <div class="card-face active" id="prevFrontFace">
+          <div class="card-header">
+            <span class="spark">✧</span>
+            <span class="card-title">DEEPSPACE HUNTER</span>
+            <span class="spark">✧</span>
+          </div>
+          <div class="card-divider"></div>
+          <div class="cf-main">
+            <div class="cf-photo-frame" id="prevPhotoFrame">
+              <div class="cf-photo-placeholder" id="prevPhotoPlaceholder">YOUR<br>PHOTO</div>
+              <div id="prevPhotoImg" class="cf-photo-img-bg"></div>
+            </div>
+            <div class="cf-stats">
+              <div class="stat-line stat-name"><span class="stat-value" data-ph="Your name" data-field="name"></span></div>
+              <div class="stat-row">
+                <div class="stat-line"><span class="stat-dot dot-pink"></span><span class="stat-label">DOB:</span><span class="stat-value" data-ph="00 / 00" data-field="birthdate"></span></div>
+                <div class="stat-line"><span class="stat-dot dot-purple"></span><span class="stat-label">GENDER:</span><span class="stat-value" data-ph="—" data-field="gender"></span></div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-line"><span class="stat-dot dot-blue"></span><span class="stat-label">HEIGHT:</span><span class="stat-value" data-ph="___ cm" data-field="height"></span></div>
+                <div class="stat-line"><span class="stat-dot dot-pink"></span><span class="stat-label">ZODIAC:</span><span class="stat-value" data-ph="—" data-field="zodiac"></span></div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-line"><span class="stat-dot dot-purple"></span><span class="stat-label">AFFILIATION:</span><span class="stat-value" data-ph="Deepspace Hunters" data-field="affiliation"></span></div>
+                <div class="stat-line"><span class="stat-dot dot-blue"></span><span class="stat-label">RANK:</span><span class="stat-value" data-ph="—" data-field="hunterRank"></span></div>
+              </div>
+              <div class="stat-line skill-line">
+                <span class="stat-dot dot-pink"></span><span class="stat-label">BOUND:</span>
+                <div class="cf-evo" id="prevBoundRow">
+                  <div class="evo-icon" data-bound="star">★</div>
+                  <div class="evo-icon" data-bound="snowflake">❄</div>
+                  <div class="evo-icon" data-bound="koi">🐟</div>
+                  <div class="evo-icon" data-bound="crow">🐦‍⬛</div>
+                  <div class="evo-icon" data-bound="apple">🍎</div>
+                  <div class="evo-icon" data-bound="paw">🐾</div>
+                </div>
+              </div>
+              <div class="stat-line"><span class="stat-dot dot-purple"></span><span class="stat-label">EVOL:</span><span class="stat-value" data-ph="—" data-field="evol"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-face" id="prevBackFace">
+          <div class="card-header">
+            <span class="spark">✧</span>
+            <span class="card-title">HUNTER PROFILE</span>
+            <span class="spark">✧</span>
+          </div>
+          <div class="card-divider"></div>
+          <div class="cb-main">
+            <div class="cb-info-block">
+              <div class="cb-section-label">MORE ABOUT YOU</div>
+              <div class="cb-about cb-about-pair">
+                <div class="cb-about-item"><span class="stat-dot dot-pink"></span><div class="lbl">⚔ WEAPON:</div><div class="val" data-ph="..." data-field="sigWeapon"></div></div>
+                <div class="cb-about-item"><span class="stat-dot dot-purple"></span><div class="lbl">♡ LIKES:</div><div class="val" data-ph="..." data-field="likes"></div></div>
+                <div class="cb-about-item"><span class="stat-dot dot-blue"></span><div class="lbl">✕ DISLIKES:</div><div class="val" data-ph="..." data-field="dislikes"></div></div>
+                <div class="cb-about-item"><span class="stat-dot dot-pink"></span><div class="lbl">⏳ HUNTER SINCE:</div><div class="val" data-ph="..." data-field="hunterSince"></div></div>
+              </div>
+            </div>
+            <div class="cb-quote">
+              <span class="quote-mark">"</span>
+              <div class="quote-text" data-ph="Type your quote here..." data-field="quote"></div>
+              <span class="quote-mark">"</span>
+            </div>
+            <div class="cb-signature">
+              <div class="cb-sig-canvas-wrap">
+                <canvas id="prevSigCanvas" class="cb-sig-canvas"></canvas>
+                <div class="cb-sig-placeholder" id="prevSigPlaceholder">Sign here</div>
+              </div>
+              <div class="cb-sig-label">SIGNATURE</div>
+            </div>
+            <div class="cb-footer">
+              <div class="badge-sub" data-ph="Badge tagline" data-field="badgeSub"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="q-upload-btn q-flip-preview-btn" id="prevFlipBtn">↺ Flip Preview</button>
     </div>
 
     <div class="q-section-title">Basics</div>
@@ -613,23 +784,130 @@
   /* ---------------- TEXT COLOR PICKER ---------------- */
   const f_textColor = document.getElementById('f_textColor');
   const qColorHex = document.getElementById('qColorHex');
-  const qColorPreview = document.getElementById('qColorPreview');
-  const qColorPreviewText = document.getElementById('qColorPreviewText');
-
-  function updateColorPreview(){
-    qColorPreviewText.style.color = f_textColor.value;
-    if(bgImageData){
-      qColorPreview.style.backgroundImage =
-        'linear-gradient(rgba(10,5,25,0.4), rgba(10,5,25,0.4)), url("' + bgImageData + '")';
-    } else {
-      qColorPreview.style.backgroundImage = '';
-    }
-  }
 
   f_textColor.addEventListener('input', function(){
     qColorHex.textContent = this.value.toUpperCase();
-    updateColorPreview();
+    syncPreview();
   });
+
+  /* ---------------- LIVE CARD PREVIEW ---------------- */
+  const prevFrontFace = document.getElementById('prevFrontFace');
+  const prevBackFace = document.getElementById('prevBackFace');
+  const prevPhotoImg = document.getElementById('prevPhotoImg');
+  const prevPhotoPlaceholder = document.getElementById('prevPhotoPlaceholder');
+  const prevSigCanvas = document.getElementById('prevSigCanvas');
+  const prevSigPlaceholder = document.getElementById('prevSigPlaceholder');
+  let previewShowingFront = true;
+
+  function hexToRgb(hex){
+    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || '');
+    return m ? {r: parseInt(m[1],16), g: parseInt(m[2],16), b: parseInt(m[3],16)} : null;
+  }
+  function recolorCanvasInk(canvas, hexColor){
+    const rgb = hexToRgb(hexColor);
+    if(!rgb || !canvas.width || !canvas.height) return;
+    const ctx = canvas.getContext('2d');
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const d = imgData.data;
+    for(let i = 0; i < d.length; i += 4){
+      if(d[i + 3] > 0){ d[i] = rgb.r; d[i + 1] = rgb.g; d[i + 2] = rgb.b; }
+    }
+    ctx.putImageData(imgData, 0, 0);
+  }
+  function paintDataUrlOnCanvas(canvas, dataUrl, onDone){
+    if(!dataUrl){
+      const ctx = canvas.getContext('2d');
+      ctx.save(); ctx.setTransform(1,0,0,1,0,0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
+      if(onDone) onDone();
+      return;
+    }
+    const img = new Image();
+    img.onload = function(){
+      const ctx = canvas.getContext('2d');
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      ctx.restore();
+      if(onDone) onDone();
+    };
+    img.src = dataUrl;
+  }
+  function fitPreviewSigCanvas(){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = prevSigCanvas.getBoundingClientRect();
+    if(!rect.width || !rect.height) return false;
+    prevSigCanvas.width = Math.round(rect.width * dpr);
+    prevSigCanvas.height = Math.round(rect.height * dpr);
+    const ctx = prevSigCanvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    return true;
+  }
+
+  function syncPreview(){
+    const data = gatherQuestionnaireData();
+
+    document.querySelectorAll('#prevCard [data-field]').forEach(function(el){
+      const key = el.getAttribute('data-field');
+      if(key in data) el.textContent = data[key] || '';
+    });
+
+    document.querySelectorAll('#prevCard .evo-icon').forEach(function(el){ el.classList.remove('selected'); });
+    (data.boundTypes || []).forEach(function(key){
+      const icon = document.querySelector('#prevCard .evo-icon[data-bound="' + key + '"]');
+      if(icon) icon.classList.add('selected');
+    });
+
+    if(data.photo){
+      prevPhotoImg.style.backgroundImage = 'url("' + data.photo + '")';
+      prevPhotoImg.style.display = 'block';
+      prevPhotoPlaceholder.style.display = 'none';
+    } else {
+      prevPhotoImg.style.backgroundImage = '';
+      prevPhotoImg.style.display = 'none';
+      prevPhotoPlaceholder.style.display = 'flex';
+    }
+
+    [prevFrontFace, prevBackFace].forEach(function(face){
+      if(data.bgImage){
+        face.style.backgroundImage = 'linear-gradient(rgba(10,5,25,0.4), rgba(10,5,25,0.4)), url("' + data.bgImage + '")';
+        face.style.backgroundSize = 'cover, cover';
+        face.style.backgroundPosition = 'center, center';
+      } else {
+        face.style.backgroundImage = '';
+      }
+      if(data.textColor) face.style.setProperty('--ink', data.textColor);
+      else face.style.removeProperty('--ink');
+    });
+
+    const pft = prevFrontFace.querySelector('.card-title'); if(pft) pft.style.color = data.titleColor || '';
+    const pbt = prevBackFace.querySelector('.card-title'); if(pbt) pbt.style.color = data.titleColor || '';
+    const pma = prevBackFace.querySelector('.cb-section-label'); if(pma) pma.style.color = data.titleColor || '';
+    const pqt = prevBackFace.querySelector('.cb-quote .quote-text'); if(pqt) pqt.style.color = data.quoteColor || '';
+
+    prevSigPlaceholder.style.display = data.signature ? 'none' : 'flex';
+    if(!previewShowingFront){
+      if(fitPreviewSigCanvas()){
+        paintDataUrlOnCanvas(prevSigCanvas, data.signature, function(){
+          if(data.signature && data.signatureColor) recolorCanvasInk(prevSigCanvas, data.signatureColor);
+        });
+      }
+    }
+  }
+
+  document.getElementById('prevFlipBtn').addEventListener('click', function(){
+    previewShowingFront = !previewShowingFront;
+    prevFrontFace.classList.toggle('active', previewShowingFront);
+    prevBackFace.classList.toggle('active', !previewShowingFront);
+    if(!previewShowingFront) syncPreview();
+  });
+
+  // Keep the preview in sync with every field the person fills out.
+  document.getElementById('qForm').addEventListener('input', syncPreview);
+  document.getElementById('qForm').addEventListener('change', syncPreview);
 
   /* ---------------- IMAGE CROPPER ---------------- */
   const cropOverlay = document.getElementById('cropOverlay');
@@ -741,6 +1019,7 @@
     const done = cropState.onDone;
     closeCropper();
     done(dataUrl);
+    syncPreview();
   });
 
   /* ---------------- PHOTO UPLOAD ---------------- */
@@ -803,7 +1082,7 @@
     });
     e.target.value = '';
   });
-  document.getElementById('qBgRemoveBtn').addEventListener('click', function(){ setBackgroundImage(''); });
+  document.getElementById('qBgRemoveBtn').addEventListener('click', function(){ setBackgroundImage(''); syncPreview(); });
 
   /* ---------------- SIGNATURE PAD ---------------- */
   const qSigCanvas = document.getElementById('qSigCanvas');
@@ -886,8 +1165,12 @@
   attachSignaturePad(qSigCanvas, function(){
     signatureData = qSigCanvas.toDataURL('image/png');
     updateSigPlaceholder();
+    syncPreview();
   });
-  document.getElementById('qSigClearBtn').addEventListener('click', clearSignature);
+  document.getElementById('qSigClearBtn').addEventListener('click', function(){
+    clearSignature();
+    syncPreview();
+  });
 
   /* ---------------- CONSENT CHECKBOXES (mutually exclusive) ---------------- */
   const consentYes = document.getElementById('consentYes');
@@ -919,9 +1202,7 @@
       photo: qPhotoData,
       bgImage: bgImageData,
       textColor: document.getElementById('f_textColor').value,
-      frontTitleColor: document.getElementById('f_frontTitleColor').value,
-      backTitleColor: document.getElementById('f_backTitleColor').value,
-      moreAboutColor: document.getElementById('f_moreAboutColor').value,
+      titleColor: document.getElementById('f_titleColor').value,
       signatureColor: document.getElementById('f_signatureColor').value,
       quoteColor: document.getElementById('f_quoteColor').value,
       canPost: document.getElementById('consentYes').checked ? 'yes' : (document.getElementById('consentNo').checked ? 'no' : '')
@@ -954,7 +1235,7 @@
     downloadJSON(gatherQuestionnaireData(), this);
   });
 
-  updateColorPreview();
+  syncPreview();
 </script>
 </body>
 </html>
