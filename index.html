@@ -154,6 +154,22 @@
   .q-row-2{display:flex;gap:20px;}
   .q-row-2 .q-field{flex:1;min-width:0;}
 
+  .q-height-row{display:flex;gap:8px;align-items:center;}
+  .q-height-num{
+    flex:1;min-width:0;
+    font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;color:var(--ink);
+    border:none;border-bottom:1px dotted var(--line);background:transparent;
+    padding:6px 2px;outline:none;text-align:center;
+  }
+  .q-height-num::placeholder{color:var(--ph);}
+  .q-height-unit{
+    flex:0 0 68px;
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:var(--ink);
+    background:var(--chip);border:2px solid var(--ink);border-radius:8px;
+    padding:6px 4px;outline:none;cursor:pointer;text-align:center;text-align-last:center;
+  }
+  .q-height-unit option{color:#2c2542;background:#fff;}
+
   .q-photo-upload{
     display:flex;align-items:center;justify-content:center;gap:16px;
     margin-bottom:8px;
@@ -655,8 +671,14 @@
         <input type="text" id="f_birthdate" placeholder="MM/DD" maxlength="5" inputmode="numeric">
       </div>
       <div class="q-field">
-        <label>Height (ft or cm)</label>
-        <input type="text" id="f_height" placeholder="e.g. 5'7&quot; or 170cm">
+        <label>Height</label>
+        <div class="q-height-row">
+          <input type="text" id="f_heightNum" class="q-height-num" placeholder="e.g. 170" inputmode="decimal">
+          <select id="f_heightUnit" class="q-height-unit">
+            <option value="cm">cm</option>
+            <option value="ft">ft</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="q-row-2">
@@ -1168,7 +1190,7 @@
       birthdate: document.getElementById('f_birthdate').value,
       gender: document.getElementById('f_gender').value,
       zodiac: document.getElementById('f_zodiac').value,
-      height: document.getElementById('f_height').value,
+      height: (document.getElementById('f_heightNum').value ? document.getElementById('f_heightNum').value + document.getElementById('f_heightUnit').value : ''),
       hunterRank: document.getElementById('f_hunterRank').value,
       affiliation: document.getElementById('f_affiliation').value,
       evol: document.getElementById('f_evol').value,
