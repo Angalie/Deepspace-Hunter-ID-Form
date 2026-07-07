@@ -181,6 +181,610 @@
   }
   .q-optional{font-weight:400;font-size:11px;color:var(--ink);opacity:0.6;letter-spacing:0;text-transform:none;}
 
+  .q-color-row{display:flex;align-items:center;justify-content:center;gap:14px;}
+  .q-color-input{
+    width:64px;height:44px;
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    padding:3px;
+    background:transparent;
+    cursor:pointer;
+  }
+  .q-color-input::-webkit-color-swatch-wrapper{padding:0;}
+  .q-color-input::-webkit-color-swatch{border:none;border-radius:6px;}
+  .q-color-input::-moz-color-swatch{border:none;border-radius:6px;}
+  .q-color-swatch-label{
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;
+    letter-spacing:1px;color:var(--ink);
+  }
+  .q-warning-note{
+    font-size:11.5px;color:#ef4444;font-weight:600;text-align:center;
+    margin-top:10px;line-height:1.5;
+  }
+
+  .q-sig-wrap{position:relative;width:100%;max-width:420px;margin:0 auto;}
+  .q-sig-canvas{
+    display:block;width:100%;height:120px;
+    border:2px solid var(--ink);border-radius:10px;
+    background:var(--chip);cursor:crosshair;touch-action:none;
+  }
+  .q-sig-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Marcellus',serif;font-style:italic;font-size:15px;color:var(--ph);
+    pointer-events:none;
+  }
+
+  .q-evo-grid{
+    display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  }
+  .q-evo-check{
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .q-evo-check input{display:none;}
+  .q-evo-icon{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--chip);
+    border:2.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+    transition:all .15s ease;
+  }
+  .q-evo-check input:checked + .q-evo-icon{
+    background:linear-gradient(135deg,var(--pink),var(--purple) 55%,var(--blue));
+    box-shadow:2px 2px 0 var(--ink);
+  }
+
+  .q-consent-box{
+    margin:28px 0 8px;
+    padding:16px 18px;
+    border:2px solid #ef4444;
+    border-radius:14px;
+    background:rgba(239,68,68,0.1);
+  }
+  .q-consent-title{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:13px;
+    color:#ef4444;
+    text-align:center;
+    margin-bottom:12px;
+    letter-spacing:0.5px;
+  }
+  .q-consent-options{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+  }
+  .q-consent-option{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:#ef4444;
+    cursor:pointer;
+  }
+  .q-consent-option input{display:none;}
+  .q-consent-check{
+    width:20px;height:20px;
+    border:2px solid #ef4444;
+    border-radius:5px;
+    display:inline-block;
+    position:relative;
+    flex-shrink:0;
+  }
+  .q-consent-option input:checked + .q-consent-check{
+    background:#ef4444;
+  }
+  .q-consent-option input:checked + .q-consent-check::after{
+    content:'✓';
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:13px;
+    font-weight:800;
+  }
+  .q-consent-note{
+    text-align:center;
+    font-size:11px;
+    color:#ef4444;
+    opacity:0.9;
+    margin:12px 0 0;
+  }
+
+  .q-submit-btn{
+    width:100%;
+    margin-top:28px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;font-size:14px;letter-spacing:0.5px;
+    padding:14px;border-radius:999px;border:2.5px solid var(--ink);color:var(--ink);
+    background:linear-gradient(120deg,var(--pink),var(--purple) 55%,var(--blue));
+    cursor:pointer;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .q-note{
+    font-size:11.5px;color:rgba(243,236,255,0.68);text-align:center;margin-top:12px;line-height:1.5;
+  }
+</style>
+</head>
+<body>
+
+  <h1 class="page-title">✦ Deepspace Hunter ID Form ✦</h1>
+  <p class="page-sub">Fill this out, then hit "Export My Answers" at the bottom. Send that file back to @AngalieMoon (X) via DM's.</p>
+  <p class="page-warning">⚠ Please DO NOT use your real personal information!</p>
+
+  <form id="qForm" onsubmit="return false;">
+    <div class="sparkles"></div>
+
+    <div class="q-section-title">Your Photo</div>
+    <div class="q-photo-upload">
+      <div class="q-photo-preview" id="qPhotoPreview">
+        <span id="qPhotoPlaceholderText">NO<br>PHOTO</span>
+        <img id="qPhotoImg" src="" alt="">
+      </div>
+      <label class="q-upload-btn" for="qPhotoInput">📷 Choose Photo</label>
+      <input type="file" id="qPhotoInput" accept="image/*" style="display:none;">
+    </div>
+
+    <div class="q-section-title">Card Background <span class="q-optional">(optional)</span></div>
+    <div class="q-photo-upload">
+      <div class="q-photo-preview" id="qBgPreview">
+        <span id="qBgPlaceholderText">NO<br>IMAGE</span>
+        <img id="qBgImg" src="" alt="">
+      </div>
+      <label class="q-upload-btn" for="qBgInput">🖼️ Choose Background</label>
+      <input type="file" id="qBgInput" accept="image/*" style="display:none;">
+      <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qBgRemoveBtn">✦ Remove</button>
+    </div>
+
+    <div class="q-section-title">Color Palette</div>
+    <div class="q-field">
+      <label>Card Text Color</label>
+      <div class="q-color-row">
+        <input type="color" id="f_textColor" class="q-color-input" value="#f3ecff">
+        <span class="q-color-swatch-label" id="qColorHex">#F3ECFF</span>
+      </div>
+      <p class="q-warning-note">⚠ Keep in mind the colors of your background image — pick a text color that still stands out against it.</p>
+    </div>
+
+    <div class="q-section-title">Basics</div>
+    <div class="q-field">
+      <label>Name</label>
+      <input type="text" id="f_name">
+    </div>
+    <div class="q-row-2">
+      <div class="q-field">
+        <label>Birthdate (MM/DD)</label>
+        <input type="text" id="f_birthdate" placeholder="MM/DD" maxlength="5" inputmode="numeric">
+      </div>
+      <div class="q-field">
+        <label>Height (ft or cm)</label>
+        <input type="text" id="f_height" placeholder="e.g. 5'7&quot; or 170cm">
+      </div>
+    </div>
+    <div class="q-row-2">
+      <div class="q-field">
+        <label>Gender</label>
+        <input type="text" id="f_gender">
+      </div>
+      <div class="q-field">
+        <label>Zodiac</label>
+        <input type="text" id="f_zodiac">
+      </div>
+    </div>
+    <div class="q-field">
+      <label>Hunter Rank</label>
+      <input type="text" id="f_hunterRank" placeholder="0-80">
+    </div>
+    <div class="q-field">      <label>Affiliation</label>
+      <input type="text" id="f_affiliation" value="Deepspace Hunters">
+    </div>
+    <div class="q-field">
+      <label>Evol</label>
+      <input type="text" id="f_evol">
+    </div>
+
+    <div class="q-section-title">Bound (multi-select)</div>
+    <div class="q-evo-grid">
+      <label class="q-evo-check"><input type="checkbox" value="star"><span class="q-evo-icon">★</span></label>
+      <label class="q-evo-check"><input type="checkbox" value="snowflake"><span class="q-evo-icon">❄</span></label>
+      <label class="q-evo-check"><input type="checkbox" value="koi"><span class="q-evo-icon">🐟</span></label>
+      <label class="q-evo-check"><input type="checkbox" value="crow"><span class="q-evo-icon">🐦‍⬛</span></label>
+      <label class="q-evo-check"><input type="checkbox" value="apple"><span class="q-evo-icon">🍎</span></label>
+      <label class="q-evo-check"><input type="checkbox" value="paw"><span class="q-evo-icon">🐾</span></label>
+    </div>
+
+    <div class="q-section-title">More About You</div>
+    <div class="q-row-2">
+      <div class="q-field">
+        <label>Signature Weapon / Gear</label>
+        <input type="text" id="f_sigWeapon">
+      </div>
+      <div class="q-field">
+        <label>Likes</label>
+        <input type="text" id="f_likes">
+      </div>
+    </div>
+    <div class="q-row-2">
+      <div class="q-field">
+        <label>Dislikes</label>
+        <input type="text" id="f_dislikes">
+      </div>
+      <div class="q-field">
+        <label>Hunter Since</label>
+        <input type="text" id="f_hunterSince" placeholder="e.g. 2151">
+      </div>
+    </div>
+
+    <div class="q-section-title">Final Touches</div>
+    <div class="q-field">
+      <label>Your Quote</label>
+      <textarea id="f_quote"></textarea>
+    </div>
+    <div class="q-field">
+      <label>Badge Tagline</label>
+      <input type="text" id="f_badgeSub" value="Humanity's future is in our hands.">
+    </div>
+    <div class="q-field">
+      <label>Signature</label>
+      <div class="q-sig-wrap">
+        <canvas id="qSigCanvas" class="q-sig-canvas"></canvas>
+        <div class="q-sig-placeholder" id="qSigPlaceholder">Sign here</div>
+      </div>
+      <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qSigClearBtn" style="margin-top:8px;">✦ Clear Signature</button>
+    </div>
+
+    <div class="q-consent-box">
+      <div class="q-consent-title">Can I post your finished card on my X (@AngalieMoon)?</div>
+      <div class="q-consent-options">
+        <label class="q-consent-option">
+          <input type="checkbox" name="canPost" value="yes" id="consentYes">
+          <span class="q-consent-check"></span> Yes
+        </label>
+        <label class="q-consent-option">
+          <input type="checkbox" name="canPost" value="no" id="consentNo">
+          <span class="q-consent-check"></span> No
+        </label>
+      </div>
+      <p class="q-consent-note">I'll DM you the finished card either way!</p>
+    </div>
+
+    <button type="button" class="q-submit-btn" id="exportAnswersBtn">⬇ Export My Answers (.json)</button>
+    <p class="q-note">Send that file back to @AngalieMoon (X) via DM's.</p>
+  </form>
+
+<script>
+  /* ---------------- BIRTHDATE AUTO-SLASH (MM/DD) ---------------- */
+  const f_birthdate = document.getElementById('f_birthdate');
+  f_birthdate.addEventListener('input', function(){
+    let digits = this.value.replace(/\D/g, '').slice(0, 4);
+    if(digits.length > 2){
+      this.value = digits.slice(0, 2) + '/' + digits.slice(2);
+    } else {
+      this.value = digits;
+    }
+  });
+
+  /* ---------------- TEXT COLOR PICKER ---------------- */
+  const f_textColor = document.getElementById('f_textColor');
+  const qColorHex = document.getElementById('qColorHex');
+  f_textColor.addEventListener('input', function(){
+    qColorHex.textContent = this.value.toUpperCase();
+  });
+
+  /* ---------------- PHOTO UPLOAD ---------------- */
+  const qPhotoInput = document.getElementById('qPhotoInput');
+  const qPhotoImg = document.getElementById('qPhotoImg');
+  const qPhotoPlaceholderText = document.getElementById('qPhotoPlaceholderText');
+  let qPhotoData = "";
+
+  qPhotoInput.addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      qPhotoData = ev.target.result;
+      qPhotoImg.src = qPhotoData;
+      qPhotoImg.style.display = 'block';
+      qPhotoPlaceholderText.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  /* ---------------- BACKGROUND IMAGE ---------------- */
+  let bgImageData = "";
+
+  function applyBackgroundImage(dataUrl){
+    // Intentionally a no-op: the uploaded background travels in the exported JSON
+    // for the ID card to use, but shouldn't change how this form itself looks.
+  }
+
+  function setBackgroundImage(dataUrl){
+    bgImageData = dataUrl || "";
+    applyBackgroundImage(bgImageData);
+    if(bgImageData){
+      qBgImg.src = bgImageData;
+      qBgImg.style.display = 'block';
+      qBgPlaceholderText.style.display = 'none';
+    } else {
+      qBgImg.src = '';
+      qBgImg.style.display = 'none';
+      qBgPlaceholderText.style.display = 'block';
+    }
+  }
+
+  function readImageFileAsBackground(file){
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){ setBackgroundImage(ev.target.result); };
+    reader.readAsDataURL(file);
+  }
+
+  const qBgInput = document.getElementById('qBgInput');
+  const qBgImg = document.getElementById('qBgImg');
+  const qBgPlaceholderText = document.getElementById('qBgPlaceholderText');
+  qBgInput.addEventListener('change', function(e){ readImageFileAsBackground(e.target.files[0]); });
+  document.getElementById('qBgRemoveBtn').addEventListener('click', function(){ setBackgroundImage(''); });
+
+  /* ---------------- SIGNATURE PAD ---------------- */
+  const qSigCanvas = document.getElementById('qSigCanvas');
+  const qSigPlaceholder = document.getElementById('qSigPlaceholder');
+  let signatureData = "";
+
+  function inkColor(){
+    return getComputedStyle(document.body).getPropertyValue('--ink').trim() || '#2c2542';
+  }
+  function applyDrawStyle(canvas){
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = inkColor();
+    ctx.fillStyle = inkColor();
+  }
+  function fitSigCanvas(canvas){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    if(!rect.width || !rect.height) return false;
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    applyDrawStyle(canvas);
+    return true;
+  }
+  function updateSigPlaceholder(){
+    qSigPlaceholder.style.display = signatureData ? 'none' : 'flex';
+  }
+  function clearSignature(){
+    const ctx = qSigCanvas.getContext('2d');
+    ctx.save(); ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0, 0, qSigCanvas.width, qSigCanvas.height);
+    ctx.restore();
+    signatureData = "";
+    updateSigPlaceholder();
+  }
+  function attachSignaturePad(canvas, onStrokeEnd){
+    let drawing = false, lastX = 0, lastY = 0;
+    function getPos(e){
+      const rect = canvas.getBoundingClientRect();
+      return {x: e.clientX - rect.left, y: e.clientY - rect.top};
+    }
+    canvas.addEventListener('pointerdown', function(e){
+      drawing = true;
+      const p = getPos(e);
+      lastX = p.x; lastY = p.y;
+      const ctx = canvas.getContext('2d');
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+      if(canvas.setPointerCapture){ try{ canvas.setPointerCapture(e.pointerId); }catch(err){} }
+      e.preventDefault();
+    });
+    canvas.addEventListener('pointermove', function(e){
+      if(!drawing) return;
+      const ctx = canvas.getContext('2d');
+      const p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      lastX = p.x; lastY = p.y;
+      e.preventDefault();
+    });
+    function stop(){
+      if(!drawing) return;
+      drawing = false;
+      onStrokeEnd();
+    }
+    canvas.addEventListener('pointerup', stop);
+    canvas.addEventListener('pointerleave', stop);
+    canvas.addEventListener('pointercancel', stop);
+  }
+
+  fitSigCanvas(qSigCanvas);
+  attachSignaturePad(qSigCanvas, function(){
+    signatureData = qSigCanvas.toDataURL('image/png');
+    updateSigPlaceholder();
+  });
+  document.getElementById('qSigClearBtn').addEventListener('click', clearSignature);
+
+  /* ---------------- CONSENT CHECKBOXES (mutually exclusive) ---------------- */
+  const consentYes = document.getElementById('consentYes');
+  const consentNo = document.getElementById('consentNo');
+  consentYes.addEventListener('change', function(){ if(consentYes.checked) consentNo.checked = false; });
+  consentNo.addEventListener('change', function(){ if(consentNo.checked) consentYes.checked = false; });
+  updateSigPlaceholder();
+
+  /* ---------------- GATHER + EXPORT ---------------- */
+  function gatherQuestionnaireData(){
+    const boundTypes = Array.from(document.querySelectorAll('.q-evo-check input:checked')).map(function(el){ return el.value; });
+    return {
+      name: document.getElementById('f_name').value,
+      birthdate: document.getElementById('f_birthdate').value,
+      gender: document.getElementById('f_gender').value,
+      zodiac: document.getElementById('f_zodiac').value,
+      height: document.getElementById('f_height').value,
+      hunterRank: document.getElementById('f_hunterRank').value,
+      affiliation: document.getElementById('f_affiliation').value,
+      evol: document.getElementById('f_evol').value,
+      boundTypes: boundTypes,
+      sigWeapon: document.getElementById('f_sigWeapon').value,
+      likes: document.getElementById('f_likes').value,
+      dislikes: document.getElementById('f_dislikes').value,
+      hunterSince: document.getElementById('f_hunterSince').value,
+      quote: document.getElementById('f_quote').value,
+      badgeSub: document.getElementById('f_badgeSub').value,
+      signature: signatureData,
+      photo: qPhotoData,
+      bgImage: bgImageData,
+      textColor: document.getElementById('f_textColor').value,
+      canPost: document.getElementById('consentYes').checked ? 'yes' : (document.getElementById('consentNo').checked ? 'no' : '')
+    };
+  }
+
+  function downloadJSON(data, triggerBtn){
+    try{
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const safeName = (data.name || 'hunter').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'hunter';
+      const link = document.createElement('a');
+      link.download = safeName + '-deepspace-answers.json';
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      if(triggerBtn){
+        const original = triggerBtn.textContent;
+        triggerBtn.textContent = '✓ Downloaded! Send that file back.';
+        setTimeout(function(){ triggerBtn.textContent = original; }, 2200);
+      }
+    } catch(err){
+      alert('Sorry, the download didn\'t go through (' + err.message + '). If you\'re viewing this inside a preview window, try opening the page in its own browser tab instead.');
+    }
+  }
+
+  document.getElementById('exportAnswersBtn').addEventListener('click', function(){
+    downloadJSON(gatherQuestionnaireData(), this);
+  });
+</script>
+</body>
+</html>
+  p.page-sub{
+    color:rgba(243,236,255,0.68);
+    font-size:13px;
+    margin:0 0 24px;
+    text-align:center;
+    max-width:520px;
+    line-height:1.5;
+  }
+  p.page-warning{
+    color:#ef4444;
+    font-weight:700;
+    font-size:13px;
+    margin:0 0 24px;
+    text-align:center;
+    max-width:520px;
+    line-height:1.5;
+  }
+
+  .sparkles{
+    position:absolute;inset:0;
+    z-index:0;
+    pointer-events:none;
+    background-image:var(--fx);
+    opacity:var(--fx-opacity);
+  }
+
+  /* ---------------- QUESTIONNAIRE ---------------- */
+  #qForm{
+    position:relative;
+    overflow:hidden;
+    width:640px;
+    max-width:100%;
+    background:var(--card-bg);
+    background-attachment:fixed;
+    border:3px solid var(--ink);
+    border-radius:22px;
+    padding:32px 36px 36px;
+    box-shadow:var(--card-shadow);
+  }
+  .q-section-title{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:13px;letter-spacing:2px;
+    color:var(--ink);
+    margin:26px 0 14px;
+    padding-bottom:8px;
+    border-bottom:2px solid var(--ink);
+    text-align:center;
+  }
+  .q-section-title:first-of-type{margin-top:0;}
+  label{
+    display:block;
+    font-family:'Poppins',sans-serif;
+    font-weight:800;
+    font-size:11px;
+    letter-spacing:0.5px;
+    color:var(--ink);
+    margin-bottom:5px;
+    text-align:center;
+  }
+  .q-field{margin-bottom:16px;text-align:center;}
+  input[type=text], textarea{
+    width:100%;
+    font-family:'Poppins',sans-serif;
+    font-size:14px;
+    font-weight:500;
+    color:var(--ink);
+    border:none;
+    border-bottom:1px dotted var(--line);
+    background:transparent;
+    padding:6px 2px;
+    outline:none;
+    text-align:center;
+  }
+  input[type=text]::placeholder, textarea::placeholder{
+    color:var(--ph);
+  }
+  textarea{resize:vertical;min-height:44px;font-family:'Poppins',sans-serif;font-size:13px;}
+  .q-row-2{display:flex;gap:20px;}
+  .q-row-2 .q-field{flex:1;min-width:0;}
+
+  .q-photo-upload{
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .q-photo-preview{
+    width:110px;height:110px;border-radius:10px;
+    border:3px solid var(--ink);
+    background:linear-gradient(180deg,var(--blue) 0%, #eef6fc 55%, var(--pink) 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink);
+    font-family:'Cinzel',serif;font-weight:700;font-size:10px;letter-spacing:2px;
+    text-align:center;line-height:1.6;
+    overflow:hidden;flex-shrink:0;
+  }
+  .q-photo-preview img{width:100%;height:100%;object-fit:cover;display:none;}
+  .q-upload-btn{
+    font-family:'Poppins',sans-serif;font-weight:700;font-size:12.5px;
+    padding:9px 18px;border-radius:999px;border:2.5px solid var(--ink);
+    background:var(--chip);color:var(--ink);cursor:pointer;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .q-upload-btn-ghost{
+    background:transparent;box-shadow:none;font-weight:600;
+  }
+  .q-optional{font-weight:400;font-size:11px;color:var(--ink);opacity:0.6;letter-spacing:0;text-transform:none;}
+
   .q-sig-wrap{position:relative;width:100%;max-width:420px;margin:0 auto;}
   .q-sig-canvas{
     display:block;width:100%;height:120px;
