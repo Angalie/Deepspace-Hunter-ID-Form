@@ -850,17 +850,6 @@
   function syncPreview(){
     const data = gatherQuestionnaireData();
 
-    document.querySelectorAll('#prevCard [data-field]').forEach(function(el){
-      const key = el.getAttribute('data-field');
-      if(key in data) el.textContent = data[key] || '';
-    });
-
-    document.querySelectorAll('#prevCard .evo-icon').forEach(function(el){ el.classList.remove('selected'); });
-    (data.boundTypes || []).forEach(function(key){
-      const icon = document.querySelector('#prevCard .evo-icon[data-bound="' + key + '"]');
-      if(icon) icon.classList.add('selected');
-    });
-
     if(data.photo){
       prevPhotoImg.style.backgroundImage = 'url("' + data.photo + '")';
       prevPhotoImg.style.display = 'block';
@@ -887,15 +876,6 @@
     const pbt = prevBackFace.querySelector('.card-title'); if(pbt) pbt.style.color = data.titleColor || '';
     const pma = prevBackFace.querySelector('.cb-section-label'); if(pma) pma.style.color = data.titleColor || '';
     const pqt = prevBackFace.querySelector('.cb-quote .quote-text'); if(pqt) pqt.style.color = data.quoteColor || '';
-
-    prevSigPlaceholder.style.display = data.signature ? 'none' : 'flex';
-    if(!previewShowingFront){
-      if(fitPreviewSigCanvas()){
-        paintDataUrlOnCanvas(prevSigCanvas, data.signature, function(){
-          if(data.signature && data.signatureColor) recolorCanvasInk(prevSigCanvas, data.signatureColor);
-        });
-      }
-    }
   }
 
   document.getElementById('prevFlipBtn').addEventListener('click', function(){
@@ -905,9 +885,12 @@
     if(!previewShowingFront) syncPreview();
   });
 
-  // Keep the preview in sync with every field the person fills out.
-  document.getElementById('qForm').addEventListener('input', syncPreview);
-  document.getElementById('qForm').addEventListener('change', syncPreview);
+  // The preview only reflects color choices and your photo/background — not the rest of
+  // the form's text fields, so it stays a clean color swatch rather than mirroring your
+  // in-progress answers.
+  document.getElementById('f_titleColor').addEventListener('input', syncPreview);
+  document.getElementById('f_signatureColor').addEventListener('input', syncPreview);
+  document.getElementById('f_quoteColor').addEventListener('input', syncPreview);
 
   /* ---------------- IMAGE CROPPER ---------------- */
   const cropOverlay = document.getElementById('cropOverlay');
@@ -1165,11 +1148,9 @@
   attachSignaturePad(qSigCanvas, function(){
     signatureData = qSigCanvas.toDataURL('image/png');
     updateSigPlaceholder();
-    syncPreview();
   });
   document.getElementById('qSigClearBtn').addEventListener('click', function(){
     clearSignature();
-    syncPreview();
   });
 
   /* ---------------- CONSENT CHECKBOXES (mutually exclusive) ---------------- */
