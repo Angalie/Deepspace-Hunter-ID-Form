@@ -81,6 +81,15 @@
     max-width:520px;
     line-height:1.5;
   }
+  p.page-warning{
+    color:#ef4444;
+    font-weight:700;
+    font-size:13px;
+    margin:0 0 24px;
+    text-align:center;
+    max-width:520px;
+    line-height:1.5;
+  }
 
   .sparkles{
     position:absolute;inset:0;
@@ -205,6 +214,68 @@
     box-shadow:2px 2px 0 var(--ink);
   }
 
+  .q-consent-box{
+    margin:28px 0 8px;
+    padding:16px 18px;
+    border:2px solid #ef4444;
+    border-radius:14px;
+    background:rgba(239,68,68,0.1);
+  }
+  .q-consent-title{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:13px;
+    color:#ef4444;
+    text-align:center;
+    margin-bottom:12px;
+    letter-spacing:0.5px;
+  }
+  .q-consent-options{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+  }
+  .q-consent-option{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Poppins',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    color:#ef4444;
+    cursor:pointer;
+  }
+  .q-consent-option input{display:none;}
+  .q-consent-check{
+    width:20px;height:20px;
+    border:2px solid #ef4444;
+    border-radius:5px;
+    display:inline-block;
+    position:relative;
+    flex-shrink:0;
+  }
+  .q-consent-option input:checked + .q-consent-check{
+    background:#ef4444;
+  }
+  .q-consent-option input:checked + .q-consent-check::after{
+    content:'✓';
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:13px;
+    font-weight:800;
+  }
+  .q-consent-note{
+    text-align:center;
+    font-size:11px;
+    color:#ef4444;
+    opacity:0.9;
+    margin:12px 0 0;
+  }
+
   .q-submit-btn{
     width:100%;
     margin-top:28px;
@@ -223,7 +294,8 @@
 <body>
 
   <h1 class="page-title">✦ Deepspace Hunter ID Form ✦</h1>
-  <p class="page-sub">Fill this out, then hit "Export My Answers" at the bottom — it downloads one small file. Send that file back to whoever asked you to fill this out, and they'll import it to build your ID card.</p>
+  <p class="page-sub">Fill this out, then hit "Export My Answers" at the bottom. Send that file back to @AngalieMoon (X) via DM's.</p>
+  <p class="page-warning">⚠ Please DO NOT use your real personal information!</p>
 
   <form id="qForm" onsubmit="return false;">
     <div class="sparkles"></div>
@@ -248,7 +320,6 @@
       <input type="file" id="qBgInput" accept="image/*" style="display:none;">
       <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qBgRemoveBtn">✦ Remove</button>
     </div>
-    <p class="q-note" style="margin-top:-4px;margin-bottom:8px;">Uploads here stay full quality — they're carried inside your exported answers file as-is.</p>
 
     <div class="q-section-title">Basics</div>
     <div class="q-field">
@@ -258,11 +329,11 @@
     <div class="q-row-2">
       <div class="q-field">
         <label>Birthdate (MM/DD)</label>
-        <input type="text" id="f_birthdate" placeholder="00 / 00">
+        <input type="text" id="f_birthdate" placeholder="MM/DD" maxlength="5" inputmode="numeric">
       </div>
       <div class="q-field">
-        <label>Height (cm)</label>
-        <input type="text" id="f_height">
+        <label>Height (ft or cm)</label>
+        <input type="text" id="f_height" placeholder="e.g. 5'7&quot; or 170cm">
       </div>
     </div>
     <div class="q-row-2">
@@ -277,10 +348,9 @@
     </div>
     <div class="q-field">
       <label>Hunter Rank</label>
-      <input type="text" id="f_hunterRank">
+      <input type="text" id="f_hunterRank" placeholder="0-80">
     </div>
-    <div class="q-field">
-      <label>Affiliation</label>
+    <div class="q-field">      <label>Affiliation</label>
       <input type="text" id="f_affiliation" value="Deepspace Hunters">
     </div>
     <div class="q-field">
@@ -288,7 +358,7 @@
       <input type="text" id="f_evol">
     </div>
 
-    <div class="q-section-title">Bound (select any)</div>
+    <div class="q-section-title">Bound (multi-select)</div>
     <div class="q-evo-grid">
       <label class="q-evo-check"><input type="checkbox" value="star"><span class="q-evo-icon">★</span></label>
       <label class="q-evo-check"><input type="checkbox" value="snowflake"><span class="q-evo-icon">❄</span></label>
@@ -338,11 +408,37 @@
       <button type="button" class="q-upload-btn q-upload-btn-ghost" id="qSigClearBtn" style="margin-top:8px;">✦ Clear Signature</button>
     </div>
 
+    <div class="q-consent-box">
+      <div class="q-consent-title">Can I post your finished card on my X (@AngalieMoon)?</div>
+      <div class="q-consent-options">
+        <label class="q-consent-option">
+          <input type="checkbox" name="canPost" value="yes" id="consentYes">
+          <span class="q-consent-check"></span> Yes
+        </label>
+        <label class="q-consent-option">
+          <input type="checkbox" name="canPost" value="no" id="consentNo">
+          <span class="q-consent-check"></span> No
+        </label>
+      </div>
+      <p class="q-consent-note">I'll DM you the finished card either way!</p>
+    </div>
+
     <button type="button" class="q-submit-btn" id="exportAnswersBtn">⬇ Export My Answers (.json)</button>
-    <p class="q-note">This downloads one small file with everything above, including your photo, background, and signature. Send it back to whoever asked you to fill this out.</p>
+    <p class="q-note">Send that file back to @AngalieMoon (X) via DM's.</p>
   </form>
 
 <script>
+  /* ---------------- BIRTHDATE AUTO-SLASH (MM/DD) ---------------- */
+  const f_birthdate = document.getElementById('f_birthdate');
+  f_birthdate.addEventListener('input', function(){
+    let digits = this.value.replace(/\D/g, '').slice(0, 4);
+    if(digits.length > 2){
+      this.value = digits.slice(0, 2) + '/' + digits.slice(2);
+    } else {
+      this.value = digits;
+    }
+  });
+
   /* ---------------- PHOTO UPLOAD ---------------- */
   const qPhotoInput = document.getElementById('qPhotoInput');
   const qPhotoImg = document.getElementById('qPhotoImg');
@@ -366,19 +462,8 @@
   let bgImageData = "";
 
   function applyBackgroundImage(dataUrl){
-    const form = document.getElementById('qForm');
-    if(dataUrl){
-      form.style.backgroundImage =
-        'linear-gradient(rgba(10,5,25,0.4), rgba(10,5,25,0.4)), url("' + dataUrl + '")';
-      form.style.backgroundSize = 'cover, cover';
-      form.style.backgroundPosition = 'center, center';
-      form.style.backgroundRepeat = 'no-repeat, no-repeat';
-    } else {
-      form.style.backgroundImage = '';
-      form.style.backgroundSize = '';
-      form.style.backgroundPosition = '';
-      form.style.backgroundRepeat = '';
-    }
+    // Intentionally a no-op: the uploaded background travels in the exported JSON
+    // for the ID card to use, but shouldn't change how this form itself looks.
   }
 
   function setBackgroundImage(dataUrl){
@@ -491,6 +576,12 @@
     updateSigPlaceholder();
   });
   document.getElementById('qSigClearBtn').addEventListener('click', clearSignature);
+
+  /* ---------------- CONSENT CHECKBOXES (mutually exclusive) ---------------- */
+  const consentYes = document.getElementById('consentYes');
+  const consentNo = document.getElementById('consentNo');
+  consentYes.addEventListener('change', function(){ if(consentYes.checked) consentNo.checked = false; });
+  consentNo.addEventListener('change', function(){ if(consentNo.checked) consentYes.checked = false; });
   updateSigPlaceholder();
 
   /* ---------------- GATHER + EXPORT ---------------- */
@@ -514,7 +605,8 @@
       badgeSub: document.getElementById('f_badgeSub').value,
       signature: signatureData,
       photo: qPhotoData,
-      bgImage: bgImageData
+      bgImage: bgImageData,
+      canPost: document.getElementById('consentYes').checked ? 'yes' : (document.getElementById('consentNo').checked ? 'no' : '')
     };
   }
 
